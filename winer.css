@@ -1,0 +1,240 @@
+/*
+ *
+ *.primary-1 : #FF9E00
+ .primary-2 : #BF8830
+ .primary-3 : #A66600
+ .primary-4 : #FFB640
+ .primary-5 : #FFC973
+
+ .secondary-a-1 : #FFC900
+ .secondary-a-4 : #FFD640
+ .secondary-a-5 : #FFE173
+
+ .secondary-b-1 : #FF5F00
+ .secondary-b-3 : #A63E00
+ .secondary-b-4 : #FF8740
+
+ .complement-1 : #0E51A7
+ .complement-2 : #274D7E
+ .complement-4 : #4282D3
+ *
+ */
+
+/***** Global *****/ 
+/* Body */ 
+body { 
+  background: #F5F4EF; 
+  color: #000305; 
+  font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+  margin: 0; 
+  padding: 0; 
+  text-align: left; 
+}
+
+/* Anchors */ 
+a {
+  outline: 0;
+} 
+
+a img {
+  border: 0px; 
+  text-decoration: none;
+} 
+
+a:link, a:visited { 
+  color: #FFB640; 
+  padding: 0 1px; 
+  text-decoration: underline; 
+} 
+
+a:hover, a:active { 
+  background-color: #FFB640; 
+  color: #fff; 
+  text-decoration: none; 
+  text-shadow: 1px 1px 1px #333; 
+}
+
+
+/***** Layout *****/ 
+.body {clear: both; margin: 0 auto; width: 80%;}
+
+/* Header */
+header {
+  background: #4282D3; 
+  border-radius: 5px;
+}
+#banner {
+  margin: 0 auto;
+  padding: 2.5em 0 0 0;
+}
+
+/* Banner */ 
+#banner h1 {
+  font-size: 3.571em; 
+  line-height: .6;
+} 
+#banner h1 a:link, #banner h1 a:visited { 
+  color: #000305; 
+  display: block; 
+  font-weight: bold; 
+  margin: 0 0 .6em .2em; 
+  text-decoration: none; 
+} 
+#banner h1 a:hover, #banner h1 a:active { 
+  background: none; 
+  color: #FFB640; 
+  text-shadow: none; 
+}
+
+/* Main Nav */ 
+#banner nav { 
+  background: #A63E00; 
+  font-size: 1.143em; 
+  height: 40px; 
+  line-height: 30px; 
+  margin: 0 auto 2em auto; 
+  padding: 0; 
+  text-align: center; 
+  border-radius: 5px; 
+}
+
+#banner nav ul {list-style: none; margin: 0 auto; width: 800px;} 
+#banner nav li {float: left; display: inline; margin: 0;}
+
+#banner nav a:link, #banner nav a:visited { 
+  color: #fff; 
+  display: inline-block; 
+  height: 30px; 
+  padding: 5px 1.5em; 
+  text-decoration: none; 
+} 
+#banner nav a:hover, #banner nav a:active, 
+#banner nav .active a:link, #banner nav .active a:visited { 
+  background: #FF5F00; 
+  color: #fff; 
+  text-shadow: none !important; 
+}
+
+#banner nav li:first-child a { border-top-left-radius: 5px;}
+
+/*Featured*/
+#featured{
+  background: #fff;
+  margin-bottom: 2em;
+  overflow: hidden;
+  padding: 20px;
+  width: 76%;
+  border-radius: 10px;
+}
+
+#feature figure {
+  border: 2px solid #eee;
+  float: right;
+  margin: 0.786em 2em 0 5em;
+  width: 25%;
+}
+#featured figure img {
+  display: block; 
+  float: right;
+} 
+
+#featured h2 {color: #FF5F00; font-size: 1.714em; margin-bottom: 0.333em;} 
+#featured h3 {font-size: 1.429em; margin-bottom: .5em;} 
+
+#featured h3 a:link, #featured h3 a:visited {
+  color: #000305; 
+  text-decoration: none;
+} 
+#featured h3 a:hover, #featured h3 a:active {color: #fff;} 
+
+/* Body 
+ * *****************/ 
+#content { 
+  background: #fff; 
+  margin-bottom: 2em; 
+  overflow: hidden; 
+  padding: 2% 2%; 
+  width: 76%;  
+  border-radius: 1%; 
+}
+
+/* About 
+ * *****************/ 
+#about { 
+  background: #fff; 
+  font-style: normal; 
+  margin-bottom: 2em; 
+  overflow: hidden; 
+  padding: 2%; 
+  text-align: left; 
+  width: 76%;  
+  border-radius: 1%; 
+}
+
+#about .primary {
+  float: left; 
+  width: 16%;
+} 
+#about .primary strong {
+  color: #FFB640; 
+  display: block; 
+  font-size: 1.286em;
+} 
+#about .photo {
+  float: left; 
+  margin: 5px 20px;
+}  
+#about .url:link, #about .url:visited {
+  text-decoration: none;
+}  
+#about .bio {
+  float: right; 
+  width: 50%;
+}  
+/* Footer 
+ * *****************/ 
+#contentinfo {
+  padding-bottom: 2em; 
+  text-align: right;
+}
+
+/* Posts */
+
+.entry {
+  border-bottom: 1px solid #eee;
+  padding: 1.5em 0;
+}
+li:last-child .entry, #content > .entry {
+  border: 0;
+}
+#content > .entry {padding: 1em 0;}
+
+.entry-title {font-size: 1.429em; margin-bottom: 0;} 
+.entry-title a:link, .entry-title a:visited {text-decoration: none;}  
+.hentry .post-info * {font-style: normal;}
+
+#posts-list {
+list-style: none; 
+margin: 0;
+} 
+#posts-list .hentry {
+padding-left: 20%; 
+position: relative;
+} 
+#posts-list footer { 
+  left: 1%; 
+  position: absolute; 
+  top: 1.5em; 
+  width: 20%; 
+}
+
+#posts-list .hentry:hover { 
+background: #FFB640; 
+color: #fff; 
+} 
+#posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { 
+  color: #F6CF74; 
+  text-shadow: 1px 1px 1px #333; 
+}
+
+
