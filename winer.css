@@ -223,7 +223,7 @@ li:last-child .entry, #content > .entry {
 list-style: none; 
 margin: 0;
 } 
-#posts-list .hentry {
+#posts-list .entry {
 padding-left: 20%; 
 position: relative;
 } 
@@ -234,13 +234,34 @@ position: relative;
   width: 20%; 
 }
 
-#posts-list .hentry:hover { 
-background: #FFB640; 
+#posts-list .entry:hover { 
+background: #274D7E; 
 color: #fff; 
 } 
-#posts-list .hentry:hover a:link, #posts-list .hentry:hover a:visited { 
+#posts-list .entry:hover a:link, #posts-list .entry:hover a:visited { 
   color: #F6CF74; 
   text-shadow: 1px 1px 1px #333; 
 }
+/* BLOG */
 
+.blog {
+  border-bottom: 1px solid #eee;
+  padding: 1.5em 0;
+}
+li:last-child .blog, #content > .blog {
+  border: 0;
+}
+#content > .entry {padding: 1em 0;}
 
+.entry-title {font-size: 1.429em; margin-bottom: 0;} 
+.entry-title a:link, .entry-title a:visited {text-decoration: none;}  
+.hentry .post-info * {font-style: normal;}
+
+#posts-list .blog{
+padding-right: 35%; 
+position: relative;
+} 
+#posts-list .blog:hover a:link, #posts-list .blog:hover a:visited { 
+  color: #F6CF74; 
+  text-shadow: 1px 1px 1px #333; 
+}
