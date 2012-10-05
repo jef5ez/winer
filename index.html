@@ -14,7 +14,8 @@
     <!--[if lt IE 7]>  
       <link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/>
     <![endif]-->
-  <script language="javascript">
+  <script type="text/javascript" language="javascript">
+     <!-- //scripty script
       var interval = 3000;
       var random_display = 0;
       var imageDir = "images/";
@@ -50,12 +51,12 @@
 
       function prevImage(place) {
         var new_image = getPrevImage();
-        document[place].src = new_image;
+        document.getElementById(place).src = new_image;
       }
 
       function switchImage(place) {
         var new_image = getNextImage();
-        document[place].src = new_image;
+        document.getElementById(place).src = new_image;
         var recur_call = "switchImage('"+place+"')";
         timerID = setTimeout(recur_call, interval);
       }
@@ -70,73 +71,74 @@
           switchImage('slideImg')
         }
       }
-
+      // -->
     </script>
   </head>
   <body onLoad="switchImage('slideImg')" id="index" class="home">
 
-  <header id="banner" class="body"> 
-    <h1>
-      <a href="#">Winer: <strong>Are you a Winer?</strong></a>
-    </h1>  
-    <nav>
-      <ul> 
-        <li class="active"><a href="index.html">home</a></li> 
-        <li><a href="offerings.html">offerings</a></li>  
-        <li><a href="profile.html">profile</a></li>
-        <li><a href="blog.html">blog</a></li> 
-        <li><a href="contact.html">contact</a></li> 
-      </ul>
-    </nav>  
-  </header>
+    <header id="banner" class="body"> 
+      <h1>
+        <a href="#">Winer: <strong>Are you a Winer?</strong></a>
+      </h1>  
+      <nav>
+        <ul> 
+          <li class="active"><a href="index.html">home</a></li> 
+          <li><a href="offerings.html">offerings</a></li>  
+          <li><a href="profile.html">profile</a></li>
+          <li><a href="blog.html">blog</a></li> 
+          <li><a href="contact.html">contact</a></li> 
+        </ul>
+      </nav>  
+    </header>
+    <div id="container" class = "body">
+      <aside id="featured" class="body">
+        <figure> <a href="#" onClick="startStop()">
+            <img id="slideImg" src="images/fpo-1.jpg" alt="Slideshow: click to pause/play" width=500 height=300 >
+          </a>
+          </figure> 
+          <hgroup>  
+            <h2>Featured Article</h2> 
+            <h3><a href="blog.html">Come check out our blog!</a></h3> 
+            </hgroup> 
+            <p>
+              Welcome to Winer! The brand new site for all your wine related needs. Find friends, events, and new wines!
+            </p> 
+      </aside>
+      <section id="content" class="body">  
+        <h2> Latest Offerings </h2>
+        <ol id="posts-list" class="feed">
+          <li>
+            <article class="entry"> ... </article>
+          </li>
+          
+          <li>
+            <article class="entry"> ... </article>
+          </li>
+          
+          <li>
+            <article class="entry"> ... </article>
+          </li>
+        </ol>
 
-  <aside id="featured" class="body">
-    <figure> <a href="#" onClick="startStop()">
-        <img name="slideImg" src="images/fpo-1.jpg" alt="Slideshow: click to pause/play" width=500 height=300 border=0>
-      </a>
-      </figure> 
-      <hgroup>  
-        <h2>Featured Article</h2> 
-        <h3><a href="#">HTML5 in Smashing Magazine!</a></h3> 
-        </hgroup> 
+      </section>    
+      <footer id="contentinfo" class="body"> 
+        <address id="about" class="vcard body"> 
+          <span class="primary"> 
+            <strong><a href="#" class="fn url">Smashing Magazine</a></strong>  
+            <span class="role">Amazing Magazine</span> 
+          </span><!-- /.primary -->  
+          <img src="images/avatar.gif" alt="Smashing Magazine Logo" class="photo" /> 
+          <span class="bio">
+            Smashing Magazine is a website and blog that offers resources and
+            advice to web developers and web designers. It was founded by Sven Lennartz and 
+            Vitaly Friedman.
+          </span>  
+        </address><!-- /#about -->
         <p>
-          Welcome to Winer! The brand new site for all your wine related needs. Find friends, events, and new wines!
+          2005-2009 <a href="http://smashingmagazine.com">Smashing Magazine</a>.
         </p> 
-  </aside>
-  <section id="content" class="body">  
-    <h2> Latest Offerings </h2>
-    <ol id="posts-list" class="feed">
-      <li>
-        <article class="entry"> ... </article>
-      </li>
-      
-      <li>
-        <article class="entry"> ... </article>
-      </li>
-      
-      <li>
-        <article class="entry"> ... </article>
-      </li>
-    </ol>
-
-  </section>    
-  <footer id="contentinfo" class="body"> 
-    <address id="about" class="vcard body"> 
-      <span class="primary"> 
-        <strong><a href="#" class="fn url">Smashing Magazine</a></strong>  
-        <span class="role">Amazing Magazine</span> 
-      </span><!-- /.primary -->  
-      <img src="images/avatar.gif" alt="Smashing Magazine Logo" class="photo" /> 
-      <span class="bio">
-        Smashing Magazine is a website and blog that offers resources and
-        advice to web developers and web designers. It was founded by Sven Lennartz and 
-        Vitaly Friedman.
-      </span>  
-    </address><!-- /#about -->
-    <p>
-      2005-2009 <a href="http://smashingmagazine.com">Smashing Magazine</a>.
-    </p> 
-  </footer>
+      </footer>
+    </div>
 
   </body>
 

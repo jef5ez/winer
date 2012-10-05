@@ -14,58 +14,59 @@
     <!--[if lt IE 7]>  
       <link rel="stylesheet" type="text/css" media="all" href="css/ie6.css"/>
     <![endif]-->
+
+    <script type='text/javascript' language='javascript'>
+      <!-- //scriptsssss
+      var e = document.getElementById("offeringType");
+      
+      function changeType(){
+      e = document.getElementById("offeringType");
+      var strType = e.options[e.selectedIndex].value;
+        if(strType == 'review'){
+          change.innerHTML = 'Varietal/Year: <input type="text" name="Wine"><br>';
+        }else if(strType=='event'){
+          change.innerHTML = 'Date: <input type="date" name="date"><br>';
+
+        }else{
+          change.innerHTML = 'Price: <input type="text" name="price"><br>';
+        }
+
+      }
+
+      function done(){
+        opener.location.reload(true);
+        self.close();
+      }
+    
+      //-->
+    </script>
   </head>
   <body id="index" class="home">
+    <div id="container" class = "body">
+      <section id="content" class="body">  
+        <h2> Submit an Offering</h2>
+        <form id="offeringForm" >
+          Offering Name: <input type="text" name="name"> <br>
+          Email: <input type="email" name="email"> <br>
+          Offering Type
+          <select id="offeringType" onchange="changeType()">
+            <option value="">Choose a Type</option>
+            <option value="review">Review</option>
+            <option value="event">Event</option>
+            <option value="sale">Sale</option>
+          </select>
+          <br>
+          <div id="change"></div>
+          Description: <br>
+          <textarea id="description" name="description" cols=50 rows=5></textarea>
+          <br>
+          <input type="submit" onClick="done()">
+        </form>
+      </section>    
+      <footer id="contentinfo" class="body"> 
+      </footer>
+    </div>
 
-  <header id="banner" class="body"> 
-    <h1>
-      <a href="#">Winer: <strong>Are you a Winer?</strong></a>
-    </h1>  
-    <nav>
-      <ul> 
-        <li><a href="index.html">home</a></li> 
-        <li><a href="offerings.html">offerings</a></li>  
-        <li><a href="profile.html">profile</a></li>
-        <li><a href="blog.html">blog</a></li> 
-        <li class="active"><a href="contact.html">contact</a></li> 
-      </ul>
-    </nav>  
-  </header>
-
-  <section id="content" class="body">  
-    <h2> Latest Offerings </h2>
-    <ol id="posts-list" class="feed">
-      <li>
-        <article class="entry"> ... </article>
-      </li>
-      
-      <li>
-        <article class="entry"> ... </article>
-      </li>
-      
-      <li>
-        <article class="entry"> ... </article>
-      </li>
-    </ol>
-
-  </section>    
-  <footer id="contentinfo" class="body"> 
-    <address id="about" class="vcard body"> 
-      <span class="primary"> 
-        <strong><a href="#" class="fn url">Smashing Magazine</a></strong>  
-        <span class="role">Amazing Magazine</span> 
-      </span><!-- /.primary -->  
-      <img src="images/avatar.gif" alt="Smashing Magazine Logo" class="photo" /> 
-      <span class="bio">
-        Smashing Magazine is a website and blog that offers resources and
-        advice to web developers and web designers. It was founded by Sven Lennartz and 
-        Vitaly Friedman.
-      </span>  
-    </address><!-- /#about -->
-    <p>
-      2005-2009 <a href="http://smashingmagazine.com">Smashing Magazine</a>.
-    </p> 
-  </footer>
 
   </body>
 
