@@ -138,55 +138,28 @@ else{?>
             </p> 
       </aside>
       <section id="content" class="body">  
-        <h2> Latest Offerings </h2>
-        <ol id="posts-list" class="feed">
-          <li>
-            <article class="entry">
-              <h2 class="entry-title">
-                <a href="offerings.html" rel="bookmark" title="Permalink to this POST TITLE">This Saturday: the Wine and Garlic Festival!</a>
-              </h2>  
-              <footer class="post-info"> 
-                <address class="vcard author">  By <a class="url fn" href="profile.html">Robert Loblaw</a> </address> 
-              </footer>        
-            </article>
-          </li>
-          
-          <li>
-            <article class="entry"> 
-              <h2 class="entry-title">
-                <a href="#" rel="bookmark" title="Permalink to this POST TITLE">A case of wine: $5!!!</a>
-              </h2>  
-              <footer class="post-info"> 
-                <address class="vcard author">  By <a class="url fn" href="#">Enrique Ramírez</a> </address> 
-              </footer>
-            </article>
-          </li>
-          
-          <li>
-            <article class="entry"> 
-              <h2 class="entry-title">
-                <a href="#" rel="bookmark" title="Permalink to this POST TITLE">This Wine tasted like Vinegar.</a>
-              </h2>  
-              <footer class="post-info"> 
-                <address class="vcard author">  By <a class="url fn" href="#">Sean Connery</a> </address> 
-              </footer>
-            </article>
-          </li>
-        </ol>
-
-
-<?php 
-
- //if the cookie has the wrong password, they are taken to the login page 
-    if ($login){ 
-      
-      echo "<h2>$name's Profile</h2>";
-      echo "Email: $email <br>";
-      $offerings = mysql_query("SELECT * FROM offerings WHERE user_id = '$user_id'")or die(mysql_error()); 	
+         <h2> Latest Offerings </h2>
+         <ol id="posts-list" class="feed">
+<?php
+  $offerings= mysql_query("SELECT offerings.ID as id, offerings.name as off, users.name as author FROM 
+    offerings join users on user_id=users.ID order by offerings.ID desc limit 5")or die(mysql_error()); 	
       while($info = mysql_fetch_array( $offerings)) 	 		{ 		
+        echo '<li>';
+        echo   '<article class="entry">';
+        echo     '<h2 class="entry-title">';
+        echo       "<a href='show_offering.php?id=".$info["id"]."' rel='bookmark'>".$info["off"]."</a>";
+        echo        '</h2>';
+        echo        '<footer class="post-info">';
+        echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
+        echo        '</footer>        
+              </article>
+            </li>';
       }
-    } 
-?>
+?>            
+          </ol>
+
+
+
     </section>
 
     <footer id="contentinfo" class="body"> 

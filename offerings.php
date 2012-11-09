@@ -79,18 +79,19 @@ else{?>
 if ($login){    
         ?>
         <div id="buttonContainer">
-          <button id="newPostButton" onclick="popup()">Create New Post</button>
+          <button id="newPostButton" onclick="window.location='new_post.php'">Create New Post</button>
         </div>
 <?php } ?>
   <h2> Latest Offerings </h2>
           <ol id="posts-list" class="feed">
 <?php
-      $offerings= mysql_query("SELECT offerings.ID as id, offerings.name as off, users.name as author FROM offerings join users on user_id=users.ID order by offerings.ID desc limit 5")or die(mysql_error()); 	
+  $offerings= mysql_query("SELECT offerings.ID as id, offerings.name as off, users.name as author FROM 
+    offerings join users on user_id=users.ID order by offerings.ID desc limit 5")or die(mysql_error()); 	
       while($info = mysql_fetch_array( $offerings)) 	 		{ 		
         echo '<li>';
         echo   '<article class="entry">';
         echo     '<h2 class="entry-title">';
-        echo       "<a href='show_offering.php?id=".$info["id"]." rel='bookmark'>".$info["off"]."</a>";
+        echo       "<a href='show_offering.php?id=".$info["id"]."' rel='bookmark'>".$info["off"]."</a>";
         echo        '</h2>';
         echo        '<footer class="post-info">';
         echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;

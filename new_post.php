@@ -1,4 +1,7 @@
 <?php // Connects to your Database 
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
+
  mysql_connect("localhost", "root", "root") or die(mysql_error());
  mysql_select_db("jef5ez_winer") or die(mysql_error()); 
 
@@ -27,7 +30,24 @@ else{
  header("Location: login.php"); 
  } 
 
+if (isset($_POST['submit'])) { 
+  
+  //  //This makes sure they did not leave any fields blank
+  if (!$_POST['name']  | !$_POST['type'] | !$_POST['email'] | !$_POST['var'] | !$_POST['desc']) {
+    die('You did not complete all of the required fields');
+  }
+   // checks if the username is in use
+  $name= mysql_real_escape_string($_POST['name']);
+  $email= mysql_real_escape_string($_POST['email']);
+  $var= mysql_real_escape_string($_POST['var']);
+  $desc= mysql_real_escape_string($_POST['desc']);
+  $type= mysql_real_escape_string($_POST['type']);
+  $insert = "INSERT INTO offerings (user_id, name, email, var, `type`,`desc`) VALUES ('".$user_id."', '".$name."', '".$email."', '".$var."', '".$type."', '".$desc."')";
+  $add_member = mysql_query($insert) or die(mysql_error()); 
 
+
+  header("Location: offerings.php");
+} else{
 ?>
 
 <head>
@@ -51,22 +71,17 @@ else{
       function changeType(){
       e = document.getElementById("offeringType");
       var strType = e.options[e.selectedIndex].value;
-        if(strType == 'review'){
-          change.innerHTML = 'Varietal/Year: <input type="text" name="Wine"><br>';
-        }else if(strType=='event'){
-          change.innerHTML = 'Date: <input type="date" name="date"><br>';
+        if(strType == 'Review'){
+          change.innerHTML = 'Varietal/Year: <input type="text" name="var"><br>';
+        }else if(strType=='Event'){
+          change.innerHTML = 'Date: <input type="date" name="var"><br>';
 
         }else{
-          change.innerHTML = 'Price: <input type="text" name="price"><br>';
+          change.innerHTML = 'Price: <input type="text" name="var"><br>';
         }
 
       }
 
-      function done(){
-        opener.location.reload(true);
-        self.close();
-      }
-    
       //-->
     </script>
  
@@ -76,36 +91,29 @@ else{
     <div id="container" class = "body">
       <section id="content" class="body">  
         <h2> Submit an Offering</h2>
-        <form id="offeringForm" >
+        <form id="offeringForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
           Offering Name: <input type="text" name="name"> <br>
-          Email: <input type="email" name="email"> <br>
+          Email: <input type="email" name="email"
+<?php 
+ if ($login){ 
+  echo "value='$email'";
+ } 
+?>
+> <br>
           Offering Type
-          <select id="offeringType" onchange="changeType()">
+          <select name='type' id="offeringType" onchange="changeType()">
             <option value="">Choose a Type</option>
-            <option value="review">Review</option>
-            <option value="event">Event</option>
-            <option value="sale">Sale</option>
+            <option value="Review">Review</option>
+            <option value="Event">Event</option>
+            <option value="Sale">Sale</option>
           </select>
           <br>
           <div id="change"></div>
           Description: <br>
-          <textarea id="description" name="description" cols=50 rows=5></textarea>
+          <textarea id="description" name="desc" cols=50 rows=5></textarea>
           <br>
-          <input type="submit" onClick="done()">
+          <input type="submit" name="submit" >
         </form>
- 
-<?php 
-
- //if the cookie has the wrong password, they are taken to the login page 
-    if ($login){ 
-      
-      echo "<h2>$name's Profile</h2>";
-      echo "Email: $email <br>";
-      $offerings = mysql_query("SELECT * FROM offerings WHERE user_id = '$user_id'")or die(mysql_error()); 	
-      while($info = mysql_fetch_array( $offerings)) 	 		{ 		
-      }
-    } 
-?>
     </section>
 
     <footer id="contentinfo" class="body"> 
@@ -128,4 +136,6 @@ else{
   </div>
 
 
-</body>
+  </body>
+<?php } ?>
+

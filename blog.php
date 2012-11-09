@@ -68,21 +68,25 @@ else{?>
       <section id="content" class="body">  
 
 <?php 
-
+  if ($login){ 
+      if($power){
+        echo "You are a power user and can Blog!<br>";
+        echo "<button type='button' onclick='window.location=\"new_blog.php\"'>Create Blog</button>";
+      }
+    } 
       echo "<h2>Latest Blogs</h2>";
       echo '<ol id="posts-list" class="feed">';
       $blogs= mysql_query("SELECT * FROM blogs order by ID desc limit 5")or die(mysql_error()); 	
       while($info = mysql_fetch_array( $blogs)) 	 		{ 		
         echo  '<li>';
         echo    '<article class="blog">';
-        echo    "<h3><a href='blog.php'>".$info['title']."</a></h3> ";
+        echo    "<h3><a href='show_blog.php?id=".$info['ID']."'>".$info['title']."</a></h3> ";
         echo    substr($info["story"], 0, 150)."...";
+        echo    "<p> ".$info['likes']." <a href='like.php?id=".$info['ID']."'>like</a> </p>" ;
         echo  '</article>';
         echo  '</li>';
       
       }
-    if ($login){ 
-    } 
 ?>
     </section>
 

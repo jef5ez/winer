@@ -1,5 +1,8 @@
 <?php // Connects to your Database 
- mysql_connect("localhost", "root", "root") or die(mysql_error());
+ ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
+
+mysql_connect("localhost", "root", "root") or die(mysql_error());
  mysql_select_db("jef5ez_winer") or die(mysql_error()); 
 
 //Checks if there is a login cookie 
@@ -22,9 +25,7 @@ if(isset($_COOKIE['ID_my_site'])){
     } 		
   } 
 } 
-
 ?>
-
 <head>
     <link rel="stylesheet" type="text/css" href="stylesheets/winer.css" />
     <meta charset="utf-8" />
@@ -93,7 +94,27 @@ else{?>
     </header>
     <div id="container" class = "body">
       <section id="content" class="body">  
-        <aside id="featured" class="body">
+<?php 
+if (isset($_POST['submit'])) { 
+  
+  //  //This makes sure they did not leave any fields blank
+  if (!$_POST['name']  | !$_POST['email']  | !$_POST['message']) {
+    die('You did not complete all of the required fields');
+  }
+   // checks if the username is in use
+  $name= mysql_real_escape_string($_POST['name']);
+  $email= mysql_real_escape_string($_POST['email']);
+  $message= mysql_real_escape_string($_POST['message']);
+
+  $insert = "INSERT INTO sugs (name, `email`,`message`) VALUES ('".$name."', '".$email."', '".$message."')";
+  $add_member = mysql_query($insert) or die(mysql_error()); 
+
+
+  echo "Thanks for the suggestion";
+} 
+
+?>
+       <aside id="featured" class="body">
           <figure>
             <a href="#" onmouseover="SwapOut()" onmouseout="SwapBack()">
                 <img src="images/wine.jpg" id="wine" width=300 height=200 alt="How are we doing?">
@@ -106,13 +127,13 @@ else{?>
           </div>
         </aside>
 
-        <form id="contactForm">
+        <form id="contactForm" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
           Name: <input type="text" name="name"><br>
           Email: <input type="email" name="email"><br>
 
           Message:<br>
           <textarea name="message" cols=50 rows=5></textarea><br>
-          <input type="submit">
+          <input type="submit" name="submit">
         </form>
         <script  type="text/javascript">
           <!--//GO AWAY SCRIPTS
@@ -128,18 +149,6 @@ else{?>
           //-->
         </script>
 
-
-
-<?php 
-
- //if the cookie has the wrong password, they are taken to the login page 
-    if ($login){ 
-      
-      $offerings = mysql_query("SELECT * FROM offerings WHERE user_id = '$user_id'")or die(mysql_error()); 	
-      while($info = mysql_fetch_array( $offerings)) 	 		{ 		
-      }
-    } 
-?>
     </section>
 
     <footer id="contentinfo" class="body"> 
@@ -160,6 +169,4 @@ else{?>
 
     </footer>
   </div>
-
-
 </body>
