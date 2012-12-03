@@ -3,8 +3,9 @@
 error_reporting(E_ALL | E_STRICT);
 
 mysql_connect("localhost", "root", "root") or die(mysql_error());
- mysql_select_db("jef5ez_winer") or die(mysql_error()); 
+mysql_select_db("jef5ez_winer") or die(mysql_error()); 
 
+$login = false; 
 //Checks if there is a login cookie 
 if(isset($_COOKIE['ID_my_site'])){ 	
 //if there is, it logs you in and directes you to the members page 
@@ -12,7 +13,6 @@ if(isset($_COOKIE['ID_my_site'])){
   $username = $_COOKIE['ID_my_site']; 	
   $user_id = $_COOKIE['user_id_my_site']; 	
   $check = mysql_query("SELECT * FROM users WHERE ID = '$user_id'")or die(mysql_error()); 	
-  $login = false; 
   while($info = mysql_fetch_array( $check )) 	 		{ 		
     if ($pass == $info['password']) 			{
       $login=true;

@@ -50,54 +50,80 @@ if(isset($_COOKIE['ID_my_site'])){
 
 </head>
 <body>
-  <header id="banner" class="body"> 
-      <h1>
-        <a href="#">Winer: <strong>Are you a Winer?</strong></a>
-      </h1>  
-      <nav>
-        <ul> 
-          <li><a href="index.php">home</a></li> 
-          <li><a href="offerings.php">offerings</a></li>  
-          <li><a href="blog.php">blog</a></li> 
+<header id="banner" class="body"> 
+    <h1>
+      <a href="#">Winer: <strong>Are you a Winer?</strong></a>
+    </h1>  
+    <nav>
+      <ul> 
+        <li><a href="index.php">home</a></li> 
+        <li><a href="offerings.php">offerings</a></li>  
+        <li><a href="blog.php">blog</a></li> 
 <?php
 if($login){?>
-           <li><a href="profile.php">profile</a></li>
-           <li><a href="logout.php">logout</a></li>
+         <li><a href="profile.php">profile</a></li>
+         <li><a href="logout.php">logout</a></li>
 <?php  }
 else{?>
-          <li><a href="sign_up.php">sign up</a></li>
-          <li><a href="login.php">login</a></li>
+        <li><a href="sign_up.php">sign up</a></li>
+        <li><a href="login.php">login</a></li>
 <?php  }    ?>
-          <li><a href="contact.php">contact</a></li> 
-        </ul>
-      </nav>  
-    </header>
-    <div id="container" class = "body">
-      <section id="content" class="body">  
+        <li><a href="contact.php">contact</a></li> 
+      </ul>
+    </nav>  
+  </header>
+  <div id="container" class = "body">
+    <section id="content" class="body">  
 <?php
-  if(isset($_GET['id'])){
-  $offerings= mysql_query("SELECT offerings.ID as id, offerings.type, offerings.var, offerings.desc, offerings.name as off, users.name as author FROM 
-    offerings join users on user_id=users.ID where offerings.ID=".$_GET['id']." limit 1")or die(mysql_error()); 	
-      while($info = mysql_fetch_array( $offerings)) 	 		{ 		
-        echo   '<article class="entry">';
-        echo     '<h2 class="entry-title">';
-        echo       "<a href='show_offering.php?id=".$info["id"]."' rel='bookmark'>".$info["off"]."</a>";
-        echo        '</h2>';
-        echo        "<h4>".$info['type'].": ".$info['var']."</h4>";
-        echo        "<p>".$info['desc']."</p>";
-        echo        '<footer class="post-info">';
-        echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
-        echo        '</footer>        
-              </article>';
-      }
-  }
-  else{
-    echo "No offering specified";
-  }
-?>            
-          </ol>
+if(isset($_GET['id'])){
+$offerings= mysql_query("SELECT offerings.ID as id, offerings.type, offerings.var, offerings.desc, offerings.name as off, users.name as author FROM 
+  offerings join users on user_id=users.ID where offerings.ID=".$_GET['id']." limit 1")or die(mysql_error()); 	
+    while($info = mysql_fetch_array( $offerings)) 	 		{ 		
+      echo   '<article class="entry">';
+      echo     '<h2 class="entry-title">';
+      echo       "<a href='show_offering.php?id=".$info["id"]."' rel='bookmark'>".$info["off"]."</a>";
+      echo        '</h2>';
+      echo        "<h4>".$info['type'].": ".$info['var']."</h4>";
+      echo        "<p>".$info['desc']."</p>";
+      echo        '<footer class="post-info">';
+      echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
+      echo        '</footer>        
+            </article>';
+    }
+}
+else{
+  echo "No offering specified";
+}
+if($login){
+?>      Add a Comment
+        <form id="contactForm" action="comment.php" method="post">
+          <input type="hidden" name="offering_id" value="<?php echo $_GET['id'] ?>" >
+          <textarea name="comment" cols=50 rows=3></textarea><br>
+          <input type="submit" name="submit">
+        </form>
+<?php }?>
 
-    </section>
+<h2> Latest Comments</h2>
+        <ol id="posts-list" class="feed">
+<?php
+$comments= mysql_query("SELECT comment, users.name as author FROM 
+  comments join users on user_id=users.ID where offering_id=".$_GET['id']." order by comments.ID desc limit 5")or die(mysql_error()); 	
+    while($info = mysql_fetch_array( $comments)) 	 		{ 		
+      echo '<li>';
+      echo   '<article class="entry">';
+      echo     '<p class="entry-title">';
+      echo       "<a rel='nofollow'>".$info["comment"]."</a>";
+      echo        '</p>';
+      echo        '<footer class="post-info">';
+      echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
+      echo        '</footer>        
+            </article>
+          </li>';
+    }
+?>           
+        </ol>
+
+      </section>
 
     <footer id="contentinfo" class="body"> 
       <address id="about" class="vcard body"> 
