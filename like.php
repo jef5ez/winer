@@ -34,4 +34,7 @@ if($login){
 
  header("Location: blog.php"); 
 }
+    else{ 
+      header("Location: login.php"); 
+    } 		
  ?> 

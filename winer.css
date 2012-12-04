@@ -217,7 +217,7 @@ li:last-child .entry, #content > .entry {
 
 .entry-title {font-size: 1.429em; margin-bottom: 0;} 
 .entry-title a:link, .entry-title a:visited {text-decoration: none;}  
-.hentry .post-info * {font-style: normal;}
+.entry .post-info * {font-style: normal;}
 
 #posts-list {
 list-style: none; 

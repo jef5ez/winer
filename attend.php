@@ -23,10 +23,17 @@ if(isset($_COOKIE['ID_my_site'])){
   } 
 }
 if($login){
-  $offering_id= mysql_real_escape_string($_POST['offering_id']);
-  $comment= mysql_real_escape_string($_POST['comment']);
+  $offering_id= mysql_real_escape_string($_GET['offering_id']);
 
-  $insert = "INSERT INTO comments (offering_id, `user_id`,`comment`) VALUES ('".$offering_id."', '".$user_id."', '".$comment."')";
+  $check = mysql_query("SELECT * FROM attendees WHERE offering_id = '$offering_id' AND user_id = '$user_id'") 
+   or die(mysql_error());
+  $check2 = mysql_num_rows($check);
+
+  if ($check2 != 0) {
+   die('You are already attending.');
+  } 
+ 
+  $insert = "INSERT INTO attendees (offering_id, `user_id`) VALUES ('".$offering_id."', '".$user_id."')";
   $add_member = mysql_query($insert) or die(mysql_error()); 
 
  header("Location:".$_SERVER['HTTP_REFERER']); 

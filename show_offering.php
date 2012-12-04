@@ -88,37 +88,61 @@ $offerings= mysql_query("SELECT offerings.ID as id, offerings.type, offerings.va
       echo        '<footer class="post-info">';
       echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
       echo        '</footer>        
-            </article>';
+        </article>';
+      if($info['type']=='Event' && $login){
+        $attendees = mysql_query("SELECT users.name as attendee FROM offerings join users on user_id=users.ID 
+          where offerings.ID=".$_GET['id'] )or die(mysql_error()); 	
+        echo "Attending: ";
+       $check = mysql_num_rows($attendees);
+        if($check==0){
+          echo "No attendees yet";
+        }else{
+          while($ppl = mysql_fetch_array($attendees)){
+
+            echo $ppl['attendee']." ";
+          }
+        }
+      }
     }
 }
 else{
   echo "No offering specified";
 }
-if($login){
-?>      Add a Comment
-        <form id="contactForm" action="comment.php" method="post">
-          <input type="hidden" name="offering_id" value="<?php echo $_GET['id'] ?>" >
-          <textarea name="comment" cols=50 rows=3></textarea><br>
-          <input type="submit" name="submit">
-        </form>
+
+if($login){ 
+?>  
+  <br>  
+  <a href="attend.php?offering_id=<?php echo $_GET['id']; ?>">Attend</a>
+   <br>
+   Add a Comment
+  <form id="contactForm" action="comment.php" method="post">
+    <input type="hidden" name="offering_id" value="<?php echo $_GET['id'] ?>" >
+    <textarea name="comment" cols=50 rows=3></textarea><br>
+    <input type="submit" name="submit">
+  </form>
 <?php }?>
 
 <h2> Latest Comments</h2>
         <ol id="posts-list" class="feed">
 <?php
-$comments= mysql_query("SELECT comment, users.name as author FROM 
+    $comments= mysql_query("SELECT comment, users.name as author FROM 
   comments join users on user_id=users.ID where offering_id=".$_GET['id']." order by comments.ID desc limit 5")or die(mysql_error()); 	
-    while($info = mysql_fetch_array( $comments)) 	 		{ 		
-      echo '<li>';
-      echo   '<article class="entry">';
-      echo     '<p class="entry-title">';
-      echo       "<a rel='nofollow'>".$info["comment"]."</a>";
-      echo        '</p>';
-      echo        '<footer class="post-info">';
-      echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
-      echo        '</footer>        
-            </article>
-          </li>';
+    $check = mysql_num_rows($comments);
+    if($check==0){
+      echo "No comments yet";
+    }else{
+      while($info = mysql_fetch_array( $comments)) 	 		{ 		
+        echo '<li>';
+        echo   '<article class="entry">';
+        echo     '<p class="post-info">';
+        echo       "<a rel='nofollow'>".$info["comment"]."</a>";
+        echo        '</p>';
+        echo        '<footer class="post-info">';
+        echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>".$info["author"]."</a> </address>" ;
+        echo        '</footer>        
+              </article>
+            </li>';
+      }
     }
 ?>           
         </ol>

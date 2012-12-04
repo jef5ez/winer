@@ -76,6 +76,23 @@ else{?>
     if ($login){ 
       echo "<h2>$name's Profile</h2>";
       echo "Email: $email <br>";
+      echo "<h2> Events you are attending: </h2>";
+      echo '<ol id="posts-list" class="feed">';
+      $offerings = mysql_query("SELECT offerings.ID as ID, offerings.name as name FROM attendees join offerings on offering_id = offerings.ID WHERE attendees.user_id = '$user_id'")
+        or die(mysql_error()); 	
+      while($info = mysql_fetch_array( $offerings)) 	 		{ 		
+        echo '<li>';
+        echo   '<article class="entry">';
+        echo     '<h2 class="entry-title">';
+        echo       "<a href='show_offering.php?id=".$info["ID"]."' rel='bookmark'>".$info["name"]."</a>";
+        echo        '</h2>';
+        echo        '<footer class="post-info">';
+        echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>You</a> </address>" ;
+        echo        '</footer> ' ;
+        echo      '</article>
+          </li>';     
+      }
+    
       if($power){
         echo "<h2>Latest Blogs</h2>";
         echo '<ol id="posts-list" class="feed">';
@@ -89,8 +106,11 @@ else{?>
           echo        "<a href='delete.php?type=blogs&id=".$info['ID']."'>Delete</a>";
           echo  '</article>';
           echo  '</li>';
-      }}
+        }
+        echo '</ol>';
+      }
 
+      echo "<h2>Latest Offers</h2>";
       echo '<ol id="posts-list" class="feed">';
       $offerings = mysql_query("SELECT * FROM offerings WHERE user_id = '$user_id'")or die(mysql_error()); 	
       while($info = mysql_fetch_array( $offerings)) 	 		{ 		
