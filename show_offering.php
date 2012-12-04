@@ -90,8 +90,8 @@ $offerings= mysql_query("SELECT offerings.ID as id, offerings.type, offerings.va
       echo        '</footer>        
         </article>';
       if($info['type']=='Event' && $login){
-        $attendees = mysql_query("SELECT users.name as attendee FROM offerings join users on user_id=users.ID 
-          where offerings.ID=".$_GET['id'] )or die(mysql_error()); 	
+        $attendees = mysql_query("SELECT users.name as attendee FROM attendees join users on user_id=users.ID 
+          where offering_id=".$_GET['id'] )or die(mysql_error()); 	
         echo "Attending: ";
        $check = mysql_num_rows($attendees);
         if($check==0){
