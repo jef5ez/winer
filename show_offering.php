@@ -102,6 +102,11 @@ $offerings= mysql_query("SELECT offerings.ID as id, offerings.type, offerings.va
             echo $ppl['attendee']." ";
           }
         }
+?>    
+  <br>  
+  <a href="attend.php?offering_id=<?php echo $_GET['id']; ?>">Attend</a>
+  <br>
+<?php
       }
     }
 }
@@ -111,10 +116,7 @@ else{
 
 if($login){ 
 ?>  
-  <br>  
-  <a href="attend.php?offering_id=<?php echo $_GET['id']; ?>">Attend</a>
-   <br>
-   Add a Comment
+  Add a Comment
   <form id="contactForm" action="comment.php" method="post">
     <input type="hidden" name="offering_id" value="<?php echo $_GET['id'] ?>" >
     <textarea name="comment" cols=50 rows=3></textarea><br>
