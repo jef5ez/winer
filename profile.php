@@ -86,13 +86,10 @@ else{?>
         echo     '<h2 class="entry-title">';
         echo       "<a href='show_offering.php?id=".$info["ID"]."' rel='bookmark'>".$info["name"]."</a>";
         echo        '</h2>';
-        echo        '<footer class="post-info">';
-        echo          "<address class='vcard author'>  By <a class='url fn' href='profile.php'>You</a> </address>" ;
-        echo        '</footer> ' ;
         echo      '</article>
           </li>';     
       }
-    
+      echo '</ol>'; 
       if($power){
         echo "<h2>Latest Blogs</h2>";
         echo '<ol id="posts-list" class="feed">';
